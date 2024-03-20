@@ -1,0 +1,81 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root {
+  --white: white;
+  --light-gray: #ccc;
+  --main-color: #a04ef6;
+}
+
+:root[data-theme='light'] {
+  --bg-card: #f8f8f8;
+  --diff-add: #179f56;
+  --diff-remove: #e00f41;
+  --text-color: #000000;
+  --highlight-add: #ddffdd;
+  --highlight-remove: #ffdddd;
+  --background-color: #ffffff;
+}
+
+:root[data-theme='dark'] {
+  --bg-card: #212121;
+  --diff-add: green;
+  --diff-remove: tomato;
+  --text-color: #ffffff;
+  --highlight-add: #179f56;
+  --highlight-remove: #e00f41;
+  --background-color: #171717;
+}
+
+*,
+*::before,
+*::after {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+* > * {
+  font-family: 'Raleway', sans-serif;
+}
+
+body {
+  color: var(--text-color);
+  background: var(--background-color);
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+.fw-300 {
+  font-weight: 300;
+}
+
+.mx-8 {
+  margin-left: 8px;
+  margin-right: 8px;
+}
+
+.px-8 {
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.btn {
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+  font-weight: 600;
+  border-radius: 4px;
+  padding: 12px 16px;
+  transition: all ease-in-out 200ms;
+}
+
+.btn:disabled {
+  cursor: not-allowed;
+  filter: contrast(0.5);
+}
