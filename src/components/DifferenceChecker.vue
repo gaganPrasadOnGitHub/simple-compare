@@ -144,10 +144,15 @@ const clearTexts = () => {
 }
 
 .btn-container {
+  top: 0px;
   gap: 16px;
   margin: 16px;
+  padding: 16px;
   display: flex;
+  position: sticky;
   align-items: center;
+  border-radius: 0 0 16px 16px;
+  background: var(--background-color);
 }
 
 .btn-compare {
