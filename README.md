@@ -1,15 +1,15 @@
-#Simple Compare https://simple-compare.web.app/
+# Simple Compare https://simple-compare.web.app/
 
-##Overview
+## Overview
 Simple Compare is a web-based tool designed to help users effortlessly identify differences between two texts. Whether you're comparing code snippets, documents, or any form of text content, Simple Compare offers an intuitive interface to visualize changes, including added, removed, or altered characters and lines.
 
-##Features
+## Features
 Text Comparison: Easily input two text snippets and view differences, highlighted for easy identification.
 Character Highlighting: Beyond line-by-line comparison, individual character differences within those lines are also highlighted, providing detailed analysis.
 Responsive Design: Optimized for a seamless experience across devices — desktops, tablets, and smartphones alike.
 Dark/Light Mode: Choose between dark or light theme for enhanced usability in different lighting conditions.
 
-##Getting Started
+## Getting Started
 To begin using Simple Compare, follow these simple steps:
 
 Navigate to Simple Compare's website.
