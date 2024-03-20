@@ -1,6 +1,6 @@
 {
   "name": "correct-compare",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "private": true,
   "type": "module",
   "scripts": {
@@ -11,6 +11,7 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "diff-match-patch": "^1.0.5",
     "vue": "^3.4.21"
   },
   "devDependencies": {

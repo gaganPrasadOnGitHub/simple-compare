@@ -32,70 +32,48 @@
 
 <script setup>
 import { ref } from 'vue'
+import DiffMatchPatch from 'diff-match-patch'
 
 const originalText = ref('')
 const modifiedText = ref('')
 const highlightedOriginal = ref('')
 const highlightedModified = ref('')
 
+const dmp = new DiffMatchPatch()
+
 const compareInput = () => {
-  const originalLines = originalText.value.split('\n')
-  const modifiedLines = modifiedText.value.split('\n')
-  let oResult = []
-  let mResult = []
+  const diffs = dmp.diff_main(originalText.value, modifiedText.value)
+  dmp.diff_cleanupSemantic(diffs)
 
-  const maxLength = Math.max(originalLines.length, modifiedLines.length)
+  let htmlOriginal = ''
+  let htmlModified = ''
 
-  for (let i = 0; i < maxLength; i++) {
-    const oLine = originalLines[i] || ''
-    const mLine = modifiedLines[i] || ''
-
-    if (oLine === mLine) {
-      oResult.push(`<div>${escapeHtml(oLine)}</div>`)
-      mResult.push(`<div>${escapeHtml(mLine)}</div>`)
-    } else {
-      const { oHighlighted, mHighlighted } = highlightCharacterDifferences(oLine, mLine)
-      oResult.push(oHighlighted)
-      mResult.push(mHighlighted)
+  diffs.forEach(([change, text]) => {
+    const escapedText = escapeHtml(text)
+    if (change === 0) {
+      htmlOriginal += escapedText
+      htmlModified += escapedText
+    } else if (change === -1) {
+      htmlOriginal += `<span class="removed">${escapedText}</span>`
+    } else if (change === 1) {
+      htmlModified += `<span class="added">${escapedText}</span>`
     }
-  }
+  })
 
-  highlightedOriginal.value = oResult.join('')
-  highlightedModified.value = mResult.join('')
+  highlightedOriginal.value = htmlOriginal
+  highlightedModified.value = htmlModified
 }
 
-const highlightCharacterDifferences = (oLine, mLine) => {
-  let oHighlighted = '<div class="px-8 removed">'
-  let mHighlighted = '<div class="px-8 added">'
-  const maxLength = Math.max(oLine.length, mLine.length)
-
-  for (let i = 0; i < maxLength; i++) {
-    const oChar = oLine[i] || ' '
-    const mChar = mLine[i] || ' '
-    if (oChar === mChar) {
-      oHighlighted += escapeHtml(oChar)
-      mHighlighted += escapeHtml(mChar)
-    } else {
-      oHighlighted += `<span class="removed-diff">${escapeHtml(oChar)}</span>`
-      mHighlighted += `<span class="added-diff">${escapeHtml(mChar)}</span>`
-    }
-  }
-
-  oHighlighted += '</div>'
-  mHighlighted += '</div>'
-  return { oHighlighted, mHighlighted }
-}
-
-const escapeHtml = (specialChar) => {
+const escapeHtml = (text) => {
   const escapeChars = {
     '&': '&amp;',
     '<': '&lt;',
     '>': '&gt;',
     '"': '&quot;',
-    "'": '&#039;'
+    "'": '&#039;',
+    '\n': '<br>'
   }
-
-  return specialChar.replace(/[&<>"']/g, (char) => escapeChars[char])
+  return text.replace(/[\n&<>"']/g, (char) => escapeChars[char])
 }
 
 const clearTexts = () => {
@@ -136,6 +114,7 @@ const clearTexts = () => {
   padding-top: 16px 0;
   background: var(--bg-card);
   border: 1px solid var(--main-color);
+  justify-content: center;
 }
 
 .input-wrapper textarea {
@@ -156,10 +135,12 @@ const clearTexts = () => {
 
 .result {
   flex: 1;
-  resize: none;
   padding: 8px;
+  overflow: auto;
   min-height: 250px;
   border-radius: 8px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
 }
 
 .btn-container {
@@ -188,13 +169,5 @@ const clearTexts = () => {
 
 .removed {
   background: var(--highlight-remove);
-}
-
-.added-diff {
-  background: var(--diff-add);
-}
-
-.removed-diff {
-  background: var(--diff-remove);
 }
 </style>
