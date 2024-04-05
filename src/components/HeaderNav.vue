@@ -1,5 +1,5 @@
 <template>
-  <div class="header-nav">
+  <div class="container header-nav">
     <h2 class="title"><span class="fw-300">Simple</span> Compare</h2>
     <img
       class="cursor-pointer theme-icon"

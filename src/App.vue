@@ -12,7 +12,7 @@ import HeaderNav from './components/HeaderNav.vue'
   <FooterNav />
 </template>
 
-<style scoped>
+<style>
 #app {
   display: flex;
   min-height: 100dvh;
@@ -22,5 +22,8 @@ import HeaderNav from './components/HeaderNav.vue'
 
 .container {
   padding: 16px;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1200px;
 }
 </style>

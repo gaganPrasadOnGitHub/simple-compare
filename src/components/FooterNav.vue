@@ -10,6 +10,7 @@
 <style scoped>
 .footer {
   margin: 16px;
+  margin-top: auto;
   text-align: center;
 }
 
